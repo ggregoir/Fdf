@@ -5,6 +5,7 @@ SRC		= src/main.c          \
 		  src/func_point.c    \
 		  src/get_next_line.c \
 		  src/read.c 		  \
+		  src/errors.c 		  \
 
 OBJ		= $(patsubst src/%.c,obj/%.o,$(SRC))
 .SILENT:

@@ -6,57 +6,103 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 15:45:34 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/01/23 19:22:16 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/01/28 15:51:51 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdio.h>
 #include "../includes/fdf.h"
 
-int		verif_count(char *line, verif_t *v)
+int		getnb(char *str)
 {
-	while (v->y != v->my)
+	int nb;
+	int neg;
+
+	neg = 0;
+	if (str[0] == '-')
 	{
-		printf("boucle y\n");
-		while (map[v->y][v->x])
-		{
-			printf("boucle x\n");
-			if(map[v->y][v->x] < '0' || map[v->y][v->x] > '9')
-				return (0);
-			v->x++;
-		}
-		if (ft_strlen(map[v->y]) - 1 != (unsigned long)v->mx)
-			return (0);
-		v->y++;
+		neg = 1;
+		str++;
 	}
-	return(1);
+	nbr = 0;
+	while ((*str >= '0') && (*str <= '9'))
+		nbr = (nb * 10) + *str++ - '0';
+	return ((neg == 1) ? -nb : nb);
+
 }
 
-char	**read_map(char ** argv)
+int		ft_pts(char *line, int nb_lines, point_t ***points)
 {
-	int		fd;
-	char	*line;
-	char	**map;
-	verif_t v;
+	char **array_str;
+	point_t *pt;
+	int i;
+
+	array_str = ft_strsplit(line, ' ');
+	i = 0;
+	while (array_str[i] != 0)
+		i++;
+	if (!((*points) = (point_t**)malloc(sizeof(point_t) * i)))
+		malloc_error();
+	i = 0;
+	while (array_str[i] != 0)
+	{
+		if (!(pt = (point_t*)malloc(sizeof(point_t))));
+			malloc_error();
+		pt->x = i * SIZE_W;
+		pt->y = nb_lines * SIZE_H;
+		pt->h = getnb(array_str[i]);
+		pt->h_color = pt->h;
+		(*points)[i] = pt;
+		i++;
+	}
+	return (i);
+}
+
+int		ft_nb_lines(char *line)
+{
+	int 	fd;
+	int 	nb_lines;
+	char	buf;
 
 	fd = 0;
-	map = NULL;
-	if ((fd = open(argv[1], O_RDONLY)) < 1)
+	nb_lines = 0;
+	if ((fd = open(c, 0_RDONLY)) < 0)
+		map_error();
+	while (read(fd, &buf, 1))
 	{
-		ft_putstr("open() error");
-		return (0);
+		if (buf == '\n')
+			nb_lines++;
 	}
-	printf("lul\n");
-	while ((get_next_line(fd, &line)) > 0)
+	close(fd);
+	return(nb_lines);
+}
+
+
+
+map_t	*read_map(char ** argv, int fd)
+{
+	int		nb_lines;
+	char	*line;
+	point_t **points;
+	lines_t *lines
+	map_t	*map;
+
+	nb_lines = 0;
+	if (!(map = (map_t*)malloc(sizeof(map_t))) ||
+	!(map->lines = (t_line**)malloc(sizeof(lines_t)* ft_nb_lines(argv[1]))))
+		malloc_error();
+	map->len = 0;
+	if ((fd = open(argv[1], O_RDONLY)) > 0)
 	{
-		printf("%s\n", line);
-		*map[v.y] = *line;
-		printf("test\n");
-		v.y++;
+		while ((get_next_line(fd, &line)) > 0)
+		{
+			if (!(line_map = (lines_t*)malloc(sizeof(lines_t))))
+				malloc_error();
+			lines->len = ft_points(line, nb_lines, &points);
+			lines->points = points;
+			map->lines[nb_lines] = lines;
+			nb_lines++;
+		}
+		map->len = nb_lines;
 	}
-	v.mx = ft_strlen(line) - 1;
-	v.my = v.y;
-	v.y = 0;
-	if (verif_count(map, &v) == 1)
-		return(map);
-	return (0);
+	return(map);
 }

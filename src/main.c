@@ -27,7 +27,7 @@ int	key_hook(int keycode, data_t data)
 int	main(int argc, char **argv)
 {
 	data_t		data;
-	char **map;
+
 
 	if(argc == 2)
 	{
@@ -35,7 +35,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if ((data.mlx_win = mlx_new_window(data.mlx_ptr, 1280, 720, "FDF")) == NULL)
 		return (EXIT_FAILURE);
-	map =read_map(argv);
+	read_map(argv, 0);
 	mlx_key_hook(data.mlx_win, key_hook, 0);
 	mlx_loop(data.mlx_ptr);
 	}
