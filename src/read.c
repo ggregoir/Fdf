@@ -6,10 +6,10 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 15:45:34 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/01/28 15:51:51 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/02/01 18:15:57 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
+
 #include "../includes/fdf.h"
 
 int		getnb(char *str)
@@ -23,9 +23,9 @@ int		getnb(char *str)
 		neg = 1;
 		str++;
 	}
-	nbr = 0;
+	nb = 0;
 	while ((*str >= '0') && (*str <= '9'))
-		nbr = (nb * 10) + *str++ - '0';
+		nb = (nb * 10) + *str++ - '0';
 	return ((neg == 1) ? -nb : nb);
 
 }
@@ -45,7 +45,7 @@ int		ft_pts(char *line, int nb_lines, point_t ***points)
 	i = 0;
 	while (array_str[i] != 0)
 	{
-		if (!(pt = (point_t*)malloc(sizeof(point_t))));
+		if (!(pt = (point_t*)malloc(sizeof(point_t))))
 			malloc_error();
 		pt->x = i * SIZE_W;
 		pt->y = nb_lines * SIZE_H;
@@ -65,7 +65,7 @@ int		ft_nb_lines(char *line)
 
 	fd = 0;
 	nb_lines = 0;
-	if ((fd = open(c, 0_RDONLY)) < 0)
+	if ((fd = open(line, O_RDONLY)) < 0)
 		map_error();
 	while (read(fd, &buf, 1))
 	{
@@ -83,21 +83,21 @@ map_t	*read_map(char ** argv, int fd)
 	int		nb_lines;
 	char	*line;
 	point_t **points;
-	lines_t *lines
+	lines_t *lines;
 	map_t	*map;
 
 	nb_lines = 0;
 	if (!(map = (map_t*)malloc(sizeof(map_t))) ||
-	!(map->lines = (t_line**)malloc(sizeof(lines_t)* ft_nb_lines(argv[1]))))
+	!(map->lines = (lines_t**)malloc(sizeof(lines_t)* ft_nb_lines(argv[1]))))
 		malloc_error();
 	map->len = 0;
 	if ((fd = open(argv[1], O_RDONLY)) > 0)
 	{
 		while ((get_next_line(fd, &line)) > 0)
 		{
-			if (!(line_map = (lines_t*)malloc(sizeof(lines_t))))
+			if (!(lines = (lines_t*)malloc(sizeof(lines_t))))
 				malloc_error();
-			lines->len = ft_points(line, nb_lines, &points);
+			lines->len = ft_pts(line, nb_lines, &points);
 			lines->points = points;
 			map->lines[nb_lines] = lines;
 			nb_lines++;

@@ -6,7 +6,7 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 13:58:37 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/01/28 15:25:36 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/02/01 17:54:35 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define BUFF_SIZE		1000
 # define SIZE_W 20
 # define SIZE_H 20
+# define W_SIZE_W 1040
+# define W_SIZE_H 1200
 
 typedef struct	point_s
 {
@@ -45,6 +47,7 @@ typedef struct	data_s
 	void		*mlx_ptr;
 	void		*mlx_win;
 	map_t		*map;
+	point_t		center;
 }				data_t;
 
 void			ft_swap_point(point_t *point1, point_t *point2);
@@ -63,6 +66,10 @@ void			fdf_exit(void);
 void			malloc_error(void);
 void			map_error(void);
 void			arg_error(void);
+void			center(data_t *data);
+void			change_x(data_t *data, int m_w);
+void			change_y(data_t *data, int m_h);
+void			adapt_map(data_t *data);
 
 
 
