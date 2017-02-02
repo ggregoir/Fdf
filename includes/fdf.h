@@ -6,7 +6,7 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 13:58:37 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/02/01 17:54:35 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/02/02 18:36:06 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 # define BUFF_SIZE		1000
 # define SIZE_W 20
 # define SIZE_H 20
-# define W_SIZE_W 1040
+# define W_SIZE_W 2200
 # define W_SIZE_H 1200
 
 typedef struct	point_s
 {
-	int			x;
-	int			y;
-	int			h;
+	double			x;
+	double			y;
+	double			h;
 	int			color;
 	int 		h_color;
 }				point_t;
@@ -70,6 +70,9 @@ void			center(data_t *data);
 void			change_x(data_t *data, int m_w);
 void			change_y(data_t *data, int m_h);
 void			adapt_map(data_t *data);
+void			ft_draw_map(data_t data);
+void			d_projo(data_t *data);
+void			projo(data_t *data, int x, int y);
 
 
 

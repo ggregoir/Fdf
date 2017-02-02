@@ -6,7 +6,7 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:07:47 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/02/01 18:16:16 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/02/02 18:37:28 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	data.map = read_map(argv, 0);
 	adapt_map(&data);
-	ft_draw_line(*data.map->lines[0]->points[0], *data.map->lines[10]->points[18], data);
+	d_projo(&data);
+	ft_draw_map(data);
 	mlx_key_hook(data.mlx_win, key_hook, 0);
 	mlx_loop(data.mlx_ptr);
 	}

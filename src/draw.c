@@ -6,10 +6,10 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:32:16 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/01/18 20:50:56 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/02/02 17:54:52 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include <stdio.h>
 #include "../includes/fdf.h"
 
 void			ft_draw(data_t data, point_t point)
@@ -55,14 +55,14 @@ int				ft_draw_line_case1(point_t i, point_t j, data_t data)
 
 int				ft_draw_line(point_t i, point_t j, data_t data)
 {
-	if (labs(j.x - i.x) >= labs(j.y - i.y))
+	if (fabs(j.x - i.x) >= fabs(j.y - i.y))
 	{
 		if (i.x < j.x)
 			ft_draw_line_case1(i, j, data);
 		else
 			ft_draw_line_case1(j, i, data);
 	}
-	else if (labs(j.x - i.x) < labs(j.y - i.y))
+	else if (fabs(j.x - i.x) < fabs(j.y - i.y))
 	{
 		if (i.x < j.x)
 			ft_draw_line_case2(i, j, data);
@@ -70,4 +70,34 @@ int				ft_draw_line(point_t i, point_t j, data_t data)
 			ft_draw_line_case2(j, i, data);
 	}
 	return (0);
+}
+
+void			ft_draw_map(data_t data)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i != data.map->lines[0]->len)
+	{
+		while (j != data.map->len - 1)
+		{
+			ft_draw_line(*data.map->lines[j]->points[i], *data.map->lines[j + 1]->points[i], data);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	i = 0;
+	while (j != data.map->len)
+	{
+		while(i != data.map->lines[0]->len - 1)
+		{
+			ft_draw_line(*data.map->lines[j]->points[i], *data.map->lines[j]->points[i + 1], data);
+			i++;
+		}
+		i = 0;
+		j++;
+	}
 }
