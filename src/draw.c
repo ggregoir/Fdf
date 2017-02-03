@@ -6,10 +6,10 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:32:16 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/02/02 17:54:52 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/02/03 14:25:11 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdio.h>
+
 #include "../includes/fdf.h"
 
 void			ft_draw(data_t data, point_t point)

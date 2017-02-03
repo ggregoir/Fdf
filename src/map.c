@@ -6,7 +6,7 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 13:16:41 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/02/02 18:29:09 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/02/03 15:27:38 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,17 @@ void	change_y(data_t *data, int m_h)
 	}
 }
 
-void	projo(data_t *data, int x, int y)
+void	projo(data_t *data, int y, int x)
 {
 	double X;
 	double Y;
 	double c;
 	double v;
 
-	c = 0.5;
+	c = 1;
 	v = 0.75;
 	X = c * data->map->lines[y]->points[x]->x - 
-		data->map->lines[0]->points[0]->y * v;
+		data->map->lines[y]->points[x]->y * v;
 	Y = data->map->lines[y]->points[x]->h + ((c / 2) * 
 		data->map->lines[y]->points[x]->x) + ((v / 2) * 
 		data->map->lines[y]->points[x]->y);
