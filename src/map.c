@@ -6,10 +6,9 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 13:16:41 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/02/03 15:27:38 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/02/11 12:50:20 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../includes/fdf.h"
 
 void	center(data_t *data)
@@ -79,7 +78,7 @@ void	projo(data_t *data, int y, int x)
 	v = 0.75;
 	X = c * data->map->lines[y]->points[x]->x - 
 		data->map->lines[y]->points[x]->y * v;
-	Y = data->map->lines[y]->points[x]->h + ((c / 2) * 
+	Y = (-1 * data->map->lines[y]->points[x]->h) + ((c / 2) * 
 		data->map->lines[y]->points[x]->x) + ((v / 2) * 
 		data->map->lines[y]->points[x]->y);
 	data->map->lines[y]->points[x]->x = X;

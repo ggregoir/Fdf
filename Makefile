@@ -7,6 +7,7 @@ SRC		= src/main.c          \
 		  src/read.c 		  \
 		  src/errors.c 		  \
 		  src/map.c 		  \
+		  src/color.c 		  \
 
 OBJ		= $(patsubst src/%.c,obj/%.o,$(SRC))
 .SILENT:
@@ -37,7 +38,7 @@ re: fclean all
 
 test: re
 	@echo '\033[32m\n\033[0m' "-------------------------------------"
-	./fdf
+	./fdf test
 
 all: $(NAME)
 .PHONY: clean fclean re all test

@@ -6,7 +6,7 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:32:16 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/02/03 14:25:11 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/02/11 12:36:27 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int				ft_draw_line_case2(point_t i, point_t j, data_t data)
 	while (y <= j.y && j.y != i.y)
 	{
 		mlx_pixel_put(data.mlx_ptr, data.mlx_win, i.x + ((j.x - i.x)
-					* (y - i.y) / (j.y - i.y)), y, 0xff0000);
+					* (y - i.y) / (j.y - i.y)), y, get_color(i, j));
 		y++;
 	}
 	return (0);
@@ -47,7 +47,7 @@ int				ft_draw_line_case1(point_t i, point_t j, data_t data)
 	while (x <= j.x && j.x != i.x)
 	{
 		mlx_pixel_put(data.mlx_ptr, data.mlx_win, x, i.y + ((j.y - i.y)
-					* (x - i.x) / (j.x - i.x)), 0xff0000);
+					* (x - i.x) / (j.x - i.x)), get_color(i, j));
 		x++;
 	}
 	return (0);

@@ -6,16 +6,16 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 15:45:34 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/02/01 18:15:57 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/02/11 13:26:19 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int		getnb(char *str)
+int			getnb(char *str)
 {
-	int nb;
-	int neg;
+	int 	nb;
+	int 	neg;
 
 	neg = 0;
 	if (str[0] == '-')
@@ -30,11 +30,28 @@ int		getnb(char *str)
 
 }
 
-int		ft_pts(char *line, int nb_lines, point_t ***points)
+void	adapt_to_screen(data_t *data, int nb_lines)
 {
-	char **array_str;
+	ft_putnbr(nb_lines);
+	if (nb_lines <= 20)
+		data->ecart = 40;
+	else if (nb_lines >= 20 && nb_lines <= 50)
+		data->ecart = 20;
+	else if (nb_lines >= 50 && nb_lines <= 100)
+		data->ecart = 15;
+	else if (nb_lines >= 100 && nb_lines <= 150)
+		data->ecart = 10;
+	else if (nb_lines >= 150 && nb_lines <= 200)
+		data->ecart = 7;
+	else
+		data->ecart = 2;
+}
+
+int			ft_pts(char *line, int nb_lines, point_t ***points, data_t data)
+{
+	char 	**array_str;
 	point_t *pt;
-	int i;
+	int 	i;
 
 	array_str = ft_strsplit(line, ' ');
 	i = 0;
@@ -47,8 +64,8 @@ int		ft_pts(char *line, int nb_lines, point_t ***points)
 	{
 		if (!(pt = (point_t*)malloc(sizeof(point_t))))
 			malloc_error();
-		pt->x = i * SIZE_W;
-		pt->y = nb_lines * SIZE_H;
+		pt->x = i * data.ecart;
+		pt->y = nb_lines * data.ecart;
 		pt->h = getnb(array_str[i]);
 		pt->h_color = pt->h;
 		(*points)[i] = pt;
@@ -57,7 +74,7 @@ int		ft_pts(char *line, int nb_lines, point_t ***points)
 	return (i);
 }
 
-int		ft_nb_lines(char *line)
+int			ft_nb_lines(char *line, data_t *data)
 {
 	int 	fd;
 	int 	nb_lines;
@@ -72,13 +89,14 @@ int		ft_nb_lines(char *line)
 		if (buf == '\n')
 			nb_lines++;
 	}
+	adapt_to_screen(data, nb_lines);
 	close(fd);
 	return(nb_lines);
 }
 
 
 
-map_t	*read_map(char ** argv, int fd)
+map_t		*read_map(char **argv, int fd, data_t *data)
 {
 	int		nb_lines;
 	char	*line;
@@ -88,7 +106,7 @@ map_t	*read_map(char ** argv, int fd)
 
 	nb_lines = 0;
 	if (!(map = (map_t*)malloc(sizeof(map_t))) ||
-	!(map->lines = (lines_t**)malloc(sizeof(lines_t)* ft_nb_lines(argv[1]))))
+	!(map->lines = (lines_t**)malloc(sizeof(lines_t) * ft_nb_lines(argv[1], data))))
 		malloc_error();
 	map->len = 0;
 	if ((fd = open(argv[1], O_RDONLY)) > 0)
@@ -97,12 +115,12 @@ map_t	*read_map(char ** argv, int fd)
 		{
 			if (!(lines = (lines_t*)malloc(sizeof(lines_t))))
 				malloc_error();
-			lines->len = ft_pts(line, nb_lines, &points);
+			lines->len = ft_pts(line, nb_lines, &points, *data);
 			lines->points = points;
 			map->lines[nb_lines] = lines;
 			nb_lines++;
 		}
 		map->len = nb_lines;
 	}
-	return(map);
+	return (map);
 }

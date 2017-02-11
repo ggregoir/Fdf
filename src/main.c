@@ -6,20 +6,26 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 14:07:47 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/02/03 15:21:31 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/02/11 13:18:32 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../includes/fdf.h"
 
 
 int	key_hook(int keycode, data_t data)
 {
+	ft_putnbr(keycode);
+	ft_putchar('\n');
 	if (!data.mlx_ptr)
 		data.mlx_ptr = 0;
 	if (keycode == 53)
 	{
 		exit(0);
+	}
+	if (keycode == 124)
+	{
+		change_x(&data, 100);
+		ft_draw_map(data);
 	}
 	return (0);
 }
@@ -34,7 +40,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if ((data.mlx_win = mlx_new_window(data.mlx_ptr, W_SIZE_W, W_SIZE_H, "FDF")) == NULL)
 		return (EXIT_FAILURE);
-	data.map = read_map(argv, 0);
+	data.map = read_map(argv, 0, &data);
 	d_projo(&data);
 	adapt_map(&data);
 	ft_draw_map(data);
