@@ -6,7 +6,7 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 18:38:05 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/02/03 15:27:09 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/03/02 12:25:19 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void			ft_swap_point(point_t *point1, point_t *point2)
 	*point2 = tmp;
 }
 
-void 			ft_swap_x(point_t *point1, point_t *point2)
+void			ft_swap_x(point_t *point1, point_t *point2)
 {
 	point_t tmp;
 

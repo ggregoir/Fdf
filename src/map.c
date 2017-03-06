@@ -6,21 +6,22 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/01 13:16:41 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/02/11 12:50:20 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/03/02 14:46:43 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../includes/fdf.h"
 
 void	center(data_t *data)
 {
 	point_t p;
-	int 	yl;
-	int 	xl;
+	int		yl;
+	int		xl;
 
 	p = data->center;
 	yl = data->map->len;
 	xl = data->map->lines[yl - 1]->len;
-	p.x = (data->map->lines[yl - 1]->points[xl - 1]->x + 
+	p.x = (data->map->lines[yl - 1]->points[xl - 1]->x +
 		data->map->lines[0]->points[0]->x) / 2;
 	p.y = (data->map->lines[yl - 1]->points[xl - 1]->y +
 		data->map->lines[0]->points[0]->y) / 2;
@@ -38,7 +39,7 @@ void	change_x(data_t *data, int m_w)
 	{
 		while (i != data->map->lines[j]->len)
 		{
-			data->map->lines[j]->points[i]->x = 
+			data->map->lines[j]->points[i]->x =
 				data->map->lines[j]->points[i]->x + m_w;
 			i++;
 		}
@@ -58,7 +59,7 @@ void	change_y(data_t *data, int m_h)
 	{
 		while (i != data->map->lines[j]->len)
 		{
-			data->map->lines[j]->points[i]->y = 
+			data->map->lines[j]->points[i]->y =
 				data->map->lines[j]->points[i]->y + m_h;
 			i++;
 		}
@@ -69,20 +70,20 @@ void	change_y(data_t *data, int m_h)
 
 void	projo(data_t *data, int y, int x)
 {
-	double X;
-	double Y;
+	double i;
+	double j;
 	double c;
 	double v;
 
-	c = 1;
-	v = 0.75;
-	X = c * data->map->lines[y]->points[x]->x - 
+	c = data->cte1;
+	v = data->cte2;
+	i = c * data->map->lines[y]->points[x]->x -
 		data->map->lines[y]->points[x]->y * v;
-	Y = (-1 * data->map->lines[y]->points[x]->h) + ((c / 2) * 
-		data->map->lines[y]->points[x]->x) + ((v / 2) * 
+	j = (-1 * data->map->lines[y]->points[x]->h) + ((c / 2) *
+		data->map->lines[y]->points[x]->x) + ((v / 2) *
 		data->map->lines[y]->points[x]->y);
-	data->map->lines[y]->points[x]->x = X;
-	data->map->lines[y]->points[x]->y = Y;
+	data->map->lines[y]->points[x]->x = i;
+	data->map->lines[y]->points[x]->y = j;
 }
 
 void	adapt_map(data_t *data)

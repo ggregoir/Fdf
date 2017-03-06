@@ -6,11 +6,12 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/17 14:49:04 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/01/23 15:09:03 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/03/02 12:28:13 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
 int				check_line(char **str, char **line, int rt)
 {
 	char		*tmp;

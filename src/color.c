@@ -6,9 +6,10 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/08 17:20:45 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/02/11 12:39:25 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/03/02 14:02:26 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../includes/fdf.h"
 
 int		adapt_color(point_t p1)

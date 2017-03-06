@@ -6,7 +6,7 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 13:58:37 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/02/11 13:33:11 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/03/02 14:26:24 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <mlx.h>
 # include <math.h>
 # define BUFF_SIZE		5000
-# define W_SIZE_W 5000
-# define W_SIZE_H 5000
+# define W_SIZE_W 2200
+# define W_SIZE_H 1200
 
 typedef struct	point_s
 {
@@ -45,6 +45,13 @@ typedef struct	data_s
 	void		*mlx_ptr;
 	void		*mlx_win;
 	int 		ecart;
+	double		cte1;
+	double		cte2;
+	int			di;
+	int			dj;
+	int			z;
+	int			i;
+	int			ltest;
 	map_t		*map;
 	point_t		center;
 }				data_t;
@@ -60,7 +67,7 @@ int				get_next_line(const int fd, char **line);
 map_t			*read_map(char ** argv, int fd, data_t *data);
 int				getnb(char *str);
 int				ft_pts(char *line, int nb_lines, point_t ***points,data_t data);
-int				ft_nb_lines(char *line, data_t *data);
+int				fl(char *line, data_t *data);
 void			fdf_exit(void);
 void			malloc_error(void);
 void			map_error(void);

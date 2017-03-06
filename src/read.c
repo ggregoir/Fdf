@@ -6,7 +6,7 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/23 15:45:34 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/02/11 13:26:19 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/03/02 15:21:22 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int			getnb(char *str)
 {
-	int 	nb;
-	int 	neg;
+	int		nb;
+	int		neg;
 
 	neg = 0;
 	if (str[0] == '-')
@@ -27,12 +27,10 @@ int			getnb(char *str)
 	while ((*str >= '0') && (*str <= '9'))
 		nb = (nb * 10) + *str++ - '0';
 	return ((neg == 1) ? -nb : nb);
-
 }
 
-void	adapt_to_screen(data_t *data, int nb_lines)
+void		adapt_to_screen(data_t *data, int nb_lines)
 {
-	ft_putnbr(nb_lines);
 	if (nb_lines <= 20)
 		data->ecart = 40;
 	else if (nb_lines >= 20 && nb_lines <= 50)
@@ -49,9 +47,9 @@ void	adapt_to_screen(data_t *data, int nb_lines)
 
 int			ft_pts(char *line, int nb_lines, point_t ***points, data_t data)
 {
-	char 	**array_str;
+	char	**array_str;
 	point_t *pt;
-	int 	i;
+	int		i;
 
 	array_str = ft_strsplit(line, ' ');
 	i = 0;
@@ -74,10 +72,10 @@ int			ft_pts(char *line, int nb_lines, point_t ***points, data_t data)
 	return (i);
 }
 
-int			ft_nb_lines(char *line, data_t *data)
+int			fl(char *line, data_t *data)
 {
-	int 	fd;
-	int 	nb_lines;
+	int		fd;
+	int		nb_lines;
 	char	buf;
 
 	fd = 0;
@@ -85,16 +83,12 @@ int			ft_nb_lines(char *line, data_t *data)
 	if ((fd = open(line, O_RDONLY)) < 0)
 		map_error();
 	while (read(fd, &buf, 1))
-	{
 		if (buf == '\n')
 			nb_lines++;
-	}
 	adapt_to_screen(data, nb_lines);
 	close(fd);
-	return(nb_lines);
+	return (nb_lines);
 }
-
-
 
 map_t		*read_map(char **argv, int fd, data_t *data)
 {
@@ -106,7 +100,7 @@ map_t		*read_map(char **argv, int fd, data_t *data)
 
 	nb_lines = 0;
 	if (!(map = (map_t*)malloc(sizeof(map_t))) ||
-	!(map->lines = (lines_t**)malloc(sizeof(lines_t) * ft_nb_lines(argv[1], data))))
+		!(map->lines = (lines_t**)malloc(sizeof(lines_t) * fl(argv[1], data))))
 		malloc_error();
 	map->len = 0;
 	if ((fd = open(argv[1], O_RDONLY)) > 0)
