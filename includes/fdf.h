@@ -6,7 +6,7 @@
 /*   By: ggregoir <ggregoir@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/12 13:58:37 by ggregoir          #+#    #+#             */
-/*   Updated: 2017/03/02 14:26:24 by ggregoir         ###   ########.fr       */
+/*   Updated: 2017/08/17 22:34:49 by ggregoir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	data_s
 	int			dj;
 	int			z;
 	int			i;
+	int			data;
 	int			ltest;
 	map_t		*map;
 	point_t		center;
